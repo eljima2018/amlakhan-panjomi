@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>املاخوان کلاس پنجم</title>
+<style>
+  * { box-sizing: border-box; font-family: Vazirmatn, Tahoma, sans-serif; }
+  body {
+    margin: 0; min-height: 100vh; color: #fff;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    display: flex; flex-direction: column;
+  }
+  header {
+    padding: 18px; text-align: center;
+    background: rgba(255,255,255,.08);
+    border-bottom: 1px solid rgba(255,255,255,.15);
+  }
+  header h1 { margin: 0; font-size: 26px; }
+  header p { margin: 6px 0 0; opacity: .8; }
+  main { flex: 1; padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+  .card {
+    background: rgba(255,255,255,.10);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 18px; padding: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  }
+  .teacher textarea {
+    width: 100%; min-height: 110px; padding: 12px; border-radius: 12px;
+    border: none; outline: none; font-size: 18px; line-height: 1.8;
+    resize: vertical;
+  }
+  .buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+  button {
+    border: none; border-radius: 12px; padding: 12px 18px; cursor: pointer;
+    font-size: 15px; font-weight: bold; color: #10202b;
+    background: #7ee8fa; transition: .2s;
+  }
+  button:hover { transform: translateY(-2px); filter: brightness(1.08); }
+  .blue { background: #4facfe; }
+  .green { background: #43e97b; }
+  .red { background: #ff6b6b; color: #fff; }
+  .gray { background: #d9d9d9; }
+  .board {
+    position: relative; height: 330px; border-radius: 18px; overflow: hidden;
+    background: #fff; border: 8px solid #8b5e3c;
+  }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; }
+  .live-text {
+    position: absolute; inset: 0; padding: 18px; color: #16324f;
+    font-size: 26px; line-height: 2; overflow: auto; white-space: pre-wrap;
+    pointer-events: none;
+  }
+  .tools {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px;
+  }
+  .tools label { font-size: 14px; }
+  input[type=color], input[type=range] { cursor: pointer; }
+  .student textarea {
+    width: 100%; min-height: 140px; padding: 14px; border-radius: 14px;
+    border: 3px dashed #7ee8fa; background: rgba(255,255,255,.95);
+    font-size: 22px; line-height: 2; outline: none; resize: vertical;
+  }
+  .result { display: none; }
+  .result.show { display: block; }
+  .score {
+    font-size: 34px; font-weight: 900; color: #43e97b; text-align: center;
+  }
+  .wrong {
+    background: rgba(255,107,107,.18); border-right: 5px solid #ff6b6b;
+    padding: 10px 14px; border-radius: 10px; margin-top: 8px; line-height: 1.9;
+  }
+  .correct {
+    background: rgba(67,233,123,.18); border-right: 5px solid #43e97b;
+    padding: 10px 14px; border-radius: 10px; margin-top: 8px; line-height: 1.9;
+  }
+  footer { text-align: center; padding: 12px; opacity: .75; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>:memo: املاخوان کلاس پنجم</h1>
+  <p>متن را بشنو، روی تخته بنویس و نمره بگیر</p>
+</header>
+
+<main>
+  <section class="card teacher">
+    <h2>متن املا</h2>
+    <textarea id="dictationText">به نام خداوند بخشنده و مهربان
+دانش‌آموزان کلاس پنجم، امروز تمرین املا داریم.
+لطفاً با دقت گوش کنید و متن را درست بنویسید.</textarea>
+
+    <div class="buttons">
+      <button class="blue" onclick="speakText()">:loud_sound: خواندن متن</button>
+      <button class="gray" onclick="stopSpeaking()">⏹ توقف</button>
+      <button class="green" onclick="startDictation()">:white_check_mark: شروع املا</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>🖼 تخته کلاس</h2>
+    <div class="board">
+      <canvas id="board"></canvas>
+      <div id="liveText" class="live-text"></div>
+    </div>
+if (score === 20) {
+    feedback += <div class="correct">آفرین! املا را بدون غلط نوشتی. 🎉</div>;
+  } else {
+    feedback += <div class="correct">تعداد کلمات درست: ${correct} از ${total}</div>;
+    feedback += <div class="wrong">تعداد خطاها: ${total - correct}</div>;
+    feedback += <div class="wrong"><strong>غلط‌ها:</strong><br>${wrongList.join('<br>')}</div>;
+  }
+
+  document.getElementById('feedback').innerHTML = feedback;
+  document.getElementById('result').classList.add('show');
+}
+</script>
+
+</body>
+</html>
